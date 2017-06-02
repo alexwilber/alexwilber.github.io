@@ -1,0 +1,592 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>Untitled Document.md</title><style></style></head><body id="preview">
+<h1><a id="Parable_Database_0"></a>Parable Database</h1>
+<pre><code class="language-sh">-- phpMyAdmin SQL Dump
+-- version <span class="hljs-number">4.0</span>.<span class="hljs-number">10</span>deb1
+-- http://www.phpmyadmin.net
+--
+-- Host: <span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>
+-- Generation Time: Jun <span class="hljs-number">02</span>, <span class="hljs-number">2017</span> at <span class="hljs-number">01</span>:<span class="hljs-number">35</span> PM
+-- Server version: <span class="hljs-number">5.5</span>.<span class="hljs-number">55</span>-<span class="hljs-number">0</span>ubuntu0.<span class="hljs-number">14.04</span>.<span class="hljs-number">1</span>
+-- PHP Version: <span class="hljs-number">5.6</span>.<span class="hljs-number">30</span>-<span class="hljs-number">10</span>+deb.sury.org~trusty+<span class="hljs-number">2</span>
+
+SET SQL_MODE = <span class="hljs-string">"NO_AUTO_VALUE_ON_ZERO"</span>;
+SET time_zone = <span class="hljs-string">"+00:00"</span>;
+
+
+/*!<span class="hljs-number">40101</span> SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!<span class="hljs-number">40101</span> SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!<span class="hljs-number">40101</span> SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!<span class="hljs-number">40101</span> SET NAMES utf8 */;
+
+--
+-- Database: `cheddar_master_db`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure <span class="hljs-keyword">for</span> table `addons`
+--
+
+CREATE TABLE IF NOT EXISTS `addons` (
+  `id` int(<span class="hljs-number">11</span>) NOT NULL AUTO_INCREMENT,
+  `deal_id` int(<span class="hljs-number">11</span>) NOT NULL,
+  `addon_amount` double DEFAULT NULL,
+  `addon_remaining_term` varchar(<span class="hljs-number">35</span>) DEFAULT NULL,
+  `addon_percentage_paid` int(<span class="hljs-number">5</span>) DEFAULT NULL,
+  `addon_note` varchar(<span class="hljs-number">100</span>) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=<span class="hljs-number">1</span> ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure <span class="hljs-keyword">for</span> table `companies`
+--
+
+CREATE TABLE IF NOT EXISTS `companies` (
+  `id` int(<span class="hljs-number">11</span>) NOT NULL AUTO_INCREMENT,
+  `company_name` varchar(<span class="hljs-number">55</span>) NOT NULL,
+  `company_started_date` varchar(<span class="hljs-number">10</span>) DEFAULT NULL,
+  `company_tax_<span class="hljs-built_in">return</span>` varchar(<span class="hljs-number">5</span>) DEFAULT NULL,
+  `company_tax_guard` varchar(<span class="hljs-number">5</span>) DEFAULT NULL,
+  `company_time_<span class="hljs-keyword">in</span>_business` varchar(<span class="hljs-number">20</span>) DEFAULT NULL,
+  `company_negative_days` int(<span class="hljs-number">5</span>) DEFAULT NULL,
+  `company_nsf_month` varchar(<span class="hljs-number">25</span>) DEFAULT NULL,
+  `company_tax_lien` varchar(<span class="hljs-number">5</span>) DEFAULT NULL,
+  `company_website_link` varchar(<span class="hljs-number">55</span>) DEFAULT NULL,
+  `company_cc_monthly_average` double DEFAULT NULL,
+  `company_twelve_month_sale` double DEFAULT NULL,
+  `company_six_month_sale` double DEFAULT NULL,
+  `company_three_month_sale` double DEFAULT NULL,
+  `company_<span class="hljs-built_in">type</span>_of_entity` varchar(<span class="hljs-number">35</span>) DEFAULT NULL,
+  `company_email` varchar(<span class="hljs-number">55</span>) DEFAULT NULL,
+  `company_industry` varchar(<span class="hljs-number">45</span>) DEFAULT NULL,
+  `company_credit_score` int(<span class="hljs-number">5</span>) DEFAULT NULL,
+  `company_competitive_balance` varchar(<span class="hljs-number">5</span>) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=<span class="hljs-number">23</span> ;
+
+------------------------------------------------
+
+--
+-- Table structure <span class="hljs-keyword">for</span> table `company_addresses`
+--
+
+CREATE TABLE IF NOT EXISTS `company_addresses` (
+  `id` int(<span class="hljs-number">11</span>) NOT NULL AUTO_INCREMENT,
+  `company_id` int(<span class="hljs-number">11</span>) NOT NULL,
+  `company_street` varchar(<span class="hljs-number">55</span>) DEFAULT NULL,
+  `company_city` varchar(<span class="hljs-number">35</span>) DEFAULT NULL,
+  `company_state` varchar(<span class="hljs-number">35</span>) DEFAULT NULL,
+  `company_zip` varchar(<span class="hljs-number">25</span>) DEFAULT NULL,
+  `company_county` varchar(<span class="hljs-number">25</span>) DEFAULT NULL,
+  `company_country` varchar(<span class="hljs-number">35</span>) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=<span class="hljs-number">19</span> ;
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure <span class="hljs-keyword">for</span> table `company_files`
+--
+
+CREATE TABLE IF NOT EXISTS `company_files` (
+  `id` int(<span class="hljs-number">11</span>) NOT NULL AUTO_INCREMENT,
+  `company_id` int(<span class="hljs-number">11</span>) NOT NULL,
+  `file_category_id` int(<span class="hljs-number">11</span>) NOT NULL,
+  `company_file_name` varchar(<span class="hljs-number">55</span>) DEFAULT NULL,
+  `company_file_link` varchar(<span class="hljs-number">55</span>) DEFAULT NULL,
+  `company_file_<span class="hljs-built_in">type</span>` varchar(<span class="hljs-number">35</span>) DEFAULT NULL,
+  `company_file_status` varchar(<span class="hljs-number">35</span>) NOT NULL,
+  `company_file_note` varchar(<span class="hljs-number">255</span>) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=<span class="hljs-number">1</span> ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure <span class="hljs-keyword">for</span> table `company_merchants`
+--
+
+CREATE TABLE IF NOT EXISTS `company_merchants` (
+  `id` int(<span class="hljs-number">11</span>) NOT NULL AUTO_INCREMENT,
+  `merchant_id` int(<span class="hljs-number">11</span>) DEFAULT NULL,
+  `company_id` int(<span class="hljs-number">11</span>) DEFAULT NULL,
+  `percentage_of_ownership` double DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=<span class="hljs-number">5</span> ;
+
+
+--
+-- Table structure <span class="hljs-keyword">for</span> table `company_phones`
+--
+
+CREATE TABLE IF NOT EXISTS `company_phones` (
+  `id` int(<span class="hljs-number">11</span>) NOT NULL AUTO_INCREMENT,
+  `company_id` int(<span class="hljs-number">11</span>) NOT NULL,
+  `company_phone_number` varchar(<span class="hljs-number">25</span>) DEFAULT NULL,
+  `company_phone_<span class="hljs-built_in">type</span>` varchar(<span class="hljs-number">15</span>) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=<span class="hljs-number">17</span> ;
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure <span class="hljs-keyword">for</span> table `company_tax_liens`
+--
+
+CREATE TABLE IF NOT EXISTS `company_tax_liens` (
+  `id` int(<span class="hljs-number">11</span>) NOT NULL AUTO_INCREMENT,
+  `company_id` int(<span class="hljs-number">11</span>) NOT NULL,
+  `company_tax_lien_holder` varchar(<span class="hljs-number">55</span>) DEFAULT NULL,
+  `company_tax_lien_amount` double NOT NULL,
+  `company_tax_lien_date` varchar(<span class="hljs-number">10</span>) NOT NULL,
+  `company_tax_lien_note` varchar(<span class="hljs-number">255</span>) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=<span class="hljs-number">14</span> ;
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure <span class="hljs-keyword">for</span> table `competitive_balances`
+--
+
+CREATE TABLE IF NOT EXISTS `competitive_balances` (
+  `id` int(<span class="hljs-number">11</span>) NOT NULL AUTO_INCREMENT,
+  `company_id` int(<span class="hljs-number">11</span>) NOT NULL,
+  `competitive_amount_funded` double DEFAULT NULL,
+  `competitive_pay_back_amount` double DEFAULT NULL,
+  `competitive_lender` varchar(<span class="hljs-number">55</span>) DEFAULT NULL,
+  `competitive_approximate_balance` double DEFAULT NULL,
+  `competitive_term` varchar(<span class="hljs-number">35</span>) DEFAULT NULL,
+  `competitive_deal_percentage` varchar(<span class="hljs-number">4</span>) DEFAULT NULL,
+  `competitive_factor_rate` varchar(<span class="hljs-number">10</span>) DEFAULT NULL,
+  `competitive_date_funded` varchar(<span class="hljs-number">10</span>) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=<span class="hljs-number">5</span> ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure <span class="hljs-keyword">for</span> table `deals`
+--
+
+CREATE TABLE IF NOT EXISTS `deals` (
+  `id` int(<span class="hljs-number">11</span>) NOT NULL AUTO_INCREMENT,
+  `iso_id` int(<span class="hljs-number">11</span>) DEFAULT NULL,
+  `lender_id` int(<span class="hljs-number">11</span>) DEFAULT NULL,
+  `company_id` int(<span class="hljs-number">11</span>) NOT NULL,
+  `sale_agent_id` int(<span class="hljs-number">11</span>) DEFAULT NULL,
+  `processor_status_id` int(<span class="hljs-number">11</span>) DEFAULT NULL,
+  `deal_name` varchar(<span class="hljs-number">55</span>) DEFAULT NULL,
+  `deal_funding_amount` double DEFAULT NULL,
+  `deal_payback_<span class="hljs-built_in">type</span>` varchar(<span class="hljs-number">25</span>) DEFAULT NULL,
+  `deal_term` varchar(<span class="hljs-number">25</span>) DEFAULT NULL,
+  `deal_lead` varchar(<span class="hljs-number">25</span>) DEFAULT NULL,
+  `deal_factor_rate` varchar(<span class="hljs-number">15</span>) DEFAULT NULL,
+  `deal_mca_bank` varchar(<span class="hljs-number">25</span>) DEFAULT NULL,
+  `deal_advanced_amount` double DEFAULT NULL,
+  `deal_prepared_by` varchar(<span class="hljs-number">55</span>) DEFAULT NULL,
+  `deal_holdback` varchar(<span class="hljs-number">35</span>) DEFAULT NULL,
+  `deal_position_number` int(<span class="hljs-number">2</span>) DEFAULT NULL,
+  `deal_paying_off_balance` varchar(<span class="hljs-number">55</span>) DEFAULT NULL,
+  `deal_<span class="hljs-built_in">type</span>` varchar(<span class="hljs-number">15</span>) DEFAULT NULL,
+  `deal_addon` varchar(<span class="hljs-number">15</span>) DEFAULT NULL,
+  `deal_status` varchar(<span class="hljs-number">35</span>) DEFAULT NULL,
+  `deal_quality` varchar(<span class="hljs-number">55</span>) DEFAULT NULL,
+  `deal_syndication` varchar(<span class="hljs-number">15</span>) DEFAULT NULL,
+  `deal_payment_frequency` varchar(<span class="hljs-number">25</span>) DEFAULT NULL,
+  `deal_payment_amount` double DEFAULT NULL,
+  `deal_closed_date` varchar(<span class="hljs-number">25</span>) DEFAULT NULL,
+  `deal_sell_rate` varchar(<span class="hljs-number">15</span>) DEFAULT NULL,
+  `deal_buy_rate` varchar(<span class="hljs-number">15</span>) DEFAULT NULL,
+  `deal_fee_sheet` varchar(<span class="hljs-number">15</span>) DEFAULT NULL,
+  `deal_commission_percentage` double DEFAULT NULL,
+  `deal_management_percentage` double DEFAULT NULL,
+  `deal_judgement` varchar(<span class="hljs-number">15</span>) DEFAULT NULL,
+  `deal_note` varchar(<span class="hljs-number">255</span>) DEFAULT NULL,
+  `deal_funded` varchar(<span class="hljs-number">15</span>) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=<span class="hljs-number">8</span> ;
+
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure <span class="hljs-keyword">for</span> table `deal_files`
+--
+
+CREATE TABLE IF NOT EXISTS `deal_files` (
+  `id` int(<span class="hljs-number">11</span>) NOT NULL AUTO_INCREMENT,
+  `deal_id` int(<span class="hljs-number">11</span>) NOT NULL,
+  `file_category_id` int(<span class="hljs-number">11</span>) NOT NULL,
+  `deal_file_name` varchar(<span class="hljs-number">55</span>) DEFAULT NULL,
+  `deal_file_link` varchar(<span class="hljs-number">255</span>) DEFAULT NULL,
+  `deal_file_<span class="hljs-built_in">type</span>` varchar(<span class="hljs-number">55</span>) DEFAULT NULL,
+  `deal_file_status` varchar(<span class="hljs-number">35</span>) DEFAULT NULL,
+  `deal_file_note` varchar(<span class="hljs-number">100</span>) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=<span class="hljs-number">1</span> ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure <span class="hljs-keyword">for</span> table `deal_notes`
+--
+
+CREATE TABLE IF NOT EXISTS `deal_notes` (
+  `id` int(<span class="hljs-number">11</span>) NOT NULL AUTO_INCREMENT,
+  `user_id` int(<span class="hljs-number">11</span>) NOT NULL,
+  `deal_id` int(<span class="hljs-number">11</span>) NOT NULL,
+  `deal_user_note` varchar(<span class="hljs-number">150</span>) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=<span class="hljs-number">4</span> ;
+
+--
+-- Dumping data <span class="hljs-keyword">for</span> table `deal_notes`
+--
+
+INSERT INTO `deal_notes` (`id`, `user_id`, `deal_id`, `deal_user_note`, `created_at`, `updated_at`) VALUES
+(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">7</span>, <span class="hljs-string">'This is the best deal I have ever made.'</span>, <span class="hljs-string">'2017-06-01 19:55:28'</span>, <span class="hljs-string">'2017-06-01 19:55:28'</span>),
+(<span class="hljs-number">2</span>, <span class="hljs-number">1</span>, <span class="hljs-number">7</span>, <span class="hljs-string">'Yooo this deal is lit'</span>, <span class="hljs-string">'2017-06-01 19:55:54'</span>, <span class="hljs-string">'2017-06-01 19:55:54'</span>),
+(<span class="hljs-number">3</span>, <span class="hljs-number">1</span>, <span class="hljs-number">7</span>, <span class="hljs-string">'I want more deals like this man.'</span>, <span class="hljs-string">'2017-06-01 20:46:32'</span>, <span class="hljs-string">'2017-06-01 20:46:32'</span>);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure <span class="hljs-keyword">for</span> table `fee_sheets`
+--
+
+CREATE TABLE IF NOT EXISTS `fee_sheets` (
+  `id` int(<span class="hljs-number">11</span>) NOT NULL AUTO_INCREMENT,
+  `deal_id` int(<span class="hljs-number">11</span>) NOT NULL,
+  `iso_id` int(<span class="hljs-number">11</span>) NOT NULL,
+  `fee_sheet_amount` double DEFAULT NULL,
+  `fee_sheet_note` varchar(<span class="hljs-number">150</span>) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=<span class="hljs-number">1</span> ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure <span class="hljs-keyword">for</span> table `file_categories`
+--
+
+CREATE TABLE IF NOT EXISTS `file_categories` (
+  `id` int(<span class="hljs-number">11</span>) NOT NULL AUTO_INCREMENT,
+  `file_category_name` varchar(<span class="hljs-number">55</span>) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=<span class="hljs-number">2</span> ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure <span class="hljs-keyword">for</span> table `isos`
+--
+
+CREATE TABLE IF NOT EXISTS `isos` (
+  `id` int(<span class="hljs-number">11</span>) NOT NULL AUTO_INCREMENT,
+  `user_id` int(<span class="hljs-number">11</span>) NOT NULL,
+  `iso_name` varchar(<span class="hljs-number">55</span>) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=<span class="hljs-number">5</span> ;
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure <span class="hljs-keyword">for</span> table `judgements`
+--
+
+CREATE TABLE IF NOT EXISTS `judgements` (
+  `id` int(<span class="hljs-number">11</span>) NOT NULL AUTO_INCREMENT,
+  `deal_id` int(<span class="hljs-number">11</span>) NOT NULL,
+  `judgement_date` varchar(<span class="hljs-number">25</span>) DEFAULT NULL,
+  `judgement_status` varchar(<span class="hljs-number">25</span>) DEFAULT NULL,
+  `judgement_amount` double DEFAULT NULL,
+  `judgement_note` varchar(<span class="hljs-number">150</span>) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=<span class="hljs-number">1</span> ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure <span class="hljs-keyword">for</span> table `lenders`
+--
+
+CREATE TABLE IF NOT EXISTS `lenders` (
+  `id` int(<span class="hljs-number">11</span>) NOT NULL AUTO_INCREMENT,
+  `user_id` int(<span class="hljs-number">11</span>) NOT NULL,
+  `lender_name` varchar(<span class="hljs-number">55</span>) NOT NULL,
+  `lender_active_days` varchar(<span class="hljs-number">15</span>) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=<span class="hljs-number">3</span> ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure <span class="hljs-keyword">for</span> table `merchants`
+--
+
+CREATE TABLE IF NOT EXISTS `merchants` (
+  `id` int(<span class="hljs-number">11</span>) NOT NULL AUTO_INCREMENT,
+  `merchant_first_name` varchar(<span class="hljs-number">55</span>) NOT NULL,
+  `merchant_middle_name` varchar(<span class="hljs-number">55</span>) DEFAULT NULL,
+  `merchant_last_name` varchar(<span class="hljs-number">55</span>) NOT NULL,
+  `merchant_suffix` varchar(<span class="hljs-number">55</span>) DEFAULT NULL,
+  `merchant_tax_lien` varchar(<span class="hljs-number">15</span>) DEFAULT NULL,
+  `merchant_tax_<span class="hljs-built_in">return</span>` varchar(<span class="hljs-number">15</span>) DEFAULT NULL,
+  `merchant_date_of_birth` varchar(<span class="hljs-number">10</span>) DEFAULT NULL,
+  `merchant_ssn` int(<span class="hljs-number">10</span>) NOT NULL,
+  `merchant_credit_score` int(<span class="hljs-number">5</span>) DEFAULT NULL,
+  `merchant_tax_guard` varchar(<span class="hljs-number">5</span>) DEFAULT NULL,
+  `merchant_email` varchar(<span class="hljs-number">55</span>) DEFAULT NULL,
+  `merchant_note` varchar(<span class="hljs-number">255</span>) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=<span class="hljs-number">28</span> ;
+
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure <span class="hljs-keyword">for</span> table `merchant_addresses`
+--
+
+CREATE TABLE IF NOT EXISTS `merchant_addresses` (
+  `id` int(<span class="hljs-number">11</span>) NOT NULL AUTO_INCREMENT,
+  `merchant_id` int(<span class="hljs-number">11</span>) NOT NULL,
+  `merchant_street` varchar(<span class="hljs-number">55</span>) NOT NULL,
+  `merchant_city` varchar(<span class="hljs-number">55</span>) NOT NULL,
+  `merchant_state` varchar(<span class="hljs-number">55</span>) NOT NULL,
+  `merchant_zip` varchar(<span class="hljs-number">25</span>) NOT NULL,
+  `merchant_county` varchar(<span class="hljs-number">55</span>) DEFAULT NULL,
+  `merchant_country` varchar(<span class="hljs-number">35</span>) NOT NULL,
+  `created_at` date DEFAULT NULL,
+  `updated_at` date DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=<span class="hljs-number">21</span> ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure <span class="hljs-keyword">for</span> table `merchant_files`
+--
+
+CREATE TABLE IF NOT EXISTS `merchant_files` (
+  `id` int(<span class="hljs-number">11</span>) NOT NULL AUTO_INCREMENT,
+  `merchant_id` int(<span class="hljs-number">11</span>) NOT NULL,
+  `file_category_id` int(<span class="hljs-number">11</span>) DEFAULT NULL,
+  `merchant_file_name` varchar(<span class="hljs-number">55</span>) NOT NULL,
+  `merchant_file_link` varchar(<span class="hljs-number">55</span>) DEFAULT NULL,
+  `merchant_file_<span class="hljs-built_in">type</span>` varchar(<span class="hljs-number">25</span>) DEFAULT NULL,
+  `merchant_file_status` varchar(<span class="hljs-number">55</span>) DEFAULT NULL,
+  `merchant_file_note` varchar(<span class="hljs-number">255</span>) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=<span class="hljs-number">1</span> ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure <span class="hljs-keyword">for</span> table `merchant_phones`
+--
+
+CREATE TABLE IF NOT EXISTS `merchant_phones` (
+  `id` int(<span class="hljs-number">11</span>) NOT NULL AUTO_INCREMENT,
+  `merchant_id` int(<span class="hljs-number">11</span>) NOT NULL,
+  `merchant_phone_number` varchar(<span class="hljs-number">25</span>) NOT NULL,
+  `merchant_phone_<span class="hljs-built_in">type</span>` varchar(<span class="hljs-number">15</span>) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=<span class="hljs-number">21</span> ;
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure <span class="hljs-keyword">for</span> table `merchant_tax_liens`
+--
+
+CREATE TABLE IF NOT EXISTS `merchant_tax_liens` (
+  `id` int(<span class="hljs-number">11</span>) NOT NULL AUTO_INCREMENT,
+  `merchant_id` int(<span class="hljs-number">11</span>) NOT NULL,
+  `merchant_tax_lien_holder` varchar(<span class="hljs-number">55</span>) NOT NULL,
+  `merchant_tax_lien_amount` varchar(<span class="hljs-number">10</span>) NOT NULL,
+  `merchant_tax_lien_date` varchar(<span class="hljs-number">10</span>) NOT NULL,
+  `merchant_tax_lien_note` varchar(<span class="hljs-number">255</span>) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=<span class="hljs-number">15</span> ;
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure <span class="hljs-keyword">for</span> table `migrations`
+--
+
+CREATE TABLE IF NOT EXISTS `migrations` (
+  `migration` varchar(<span class="hljs-number">255</span>) COLLATE utf8_unicode_ci NOT NULL,
+  `batch` int(<span class="hljs-number">11</span>) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure <span class="hljs-keyword">for</span> table `password_resets`
+--
+
+CREATE TABLE IF NOT EXISTS `password_resets` (
+  `email` varchar(<span class="hljs-number">255</span>) COLLATE utf8_unicode_ci NOT NULL,
+  `token` varchar(<span class="hljs-number">255</span>) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  KEY `password_resets_email_index` (`email`),
+  KEY `password_resets_token_index` (`token`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data <span class="hljs-keyword">for</span> table `password_resets`
+--
+
+INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
+(<span class="hljs-string">'arivers336@gmail.com'</span>, <span class="hljs-string">'$2y$10$H4QMeUty7kCoWFBMHGCyf.5bfSO4vcH66ramARFShHla9ayAbIx/m'</span>, <span class="hljs-string">'2017-05-19 14:19:49'</span>);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure <span class="hljs-keyword">for</span> table `processor_statuses`
+--
+
+CREATE TABLE IF NOT EXISTS `processor_statuses` (
+  `id` int(<span class="hljs-number">11</span>) NOT NULL AUTO_INCREMENT,
+  `user_id` int(<span class="hljs-number">11</span>) NOT NULL,
+  `processor_name` varchar(<span class="hljs-number">55</span>) DEFAULT NULL,
+  `processor_job_description` varchar(<span class="hljs-number">255</span>) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `role` varchar(<span class="hljs-number">35</span>) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=<span class="hljs-number">3</span> ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure <span class="hljs-keyword">for</span> table `sale_agents`
+--
+
+CREATE TABLE IF NOT EXISTS `sale_agents` (
+  `id` int(<span class="hljs-number">11</span>) NOT NULL AUTO_INCREMENT,
+  `iso_id` int(<span class="hljs-number">11</span>) DEFAULT NULL,
+  `user_id` int(<span class="hljs-number">11</span>) DEFAULT NULL,
+  `agent_name` varchar(<span class="hljs-number">55</span>) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=<span class="hljs-number">2</span> ;
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure <span class="hljs-keyword">for</span> table `syndications`
+--
+
+CREATE TABLE IF NOT EXISTS `syndications` (
+  `id` int(<span class="hljs-number">11</span>) NOT NULL AUTO_INCREMENT,
+  `deal_id` int(<span class="hljs-number">11</span>) NOT NULL,
+  `syndication_amount` double DEFAULT NULL,
+  `syndication_name` varchar(<span class="hljs-number">55</span>) DEFAULT NULL,
+  `syndication_agreement` varchar(<span class="hljs-number">100</span>) DEFAULT NULL,
+  `syndication_deal_percentage` double DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=<span class="hljs-number">1</span> ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure <span class="hljs-keyword">for</span> table `users`
+--
+
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(<span class="hljs-number">10</span>) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(<span class="hljs-number">255</span>) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `email` varchar(<span class="hljs-number">255</span>) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(<span class="hljs-number">255</span>) COLLATE utf8_unicode_ci NOT NULL,
+  `role` varchar(<span class="hljs-number">35</span>) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `remember_token` varchar(<span class="hljs-number">100</span>) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `users_email_unique` (`email`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=<span class="hljs-number">21</span> ;
+
+--
+-- Dumping data <span class="hljs-keyword">for</span> table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `role`, `remember_token`, `created_at`, `updated_at`) VALUES
+(<span class="hljs-number">1</span>, <span class="hljs-string">'Serigne'</span>, <span class="hljs-string">'seloweb810@gmail.com'</span>, <span class="hljs-string">'$2y$10$EU.04KxxQCsjcrPyc5uXR.rv3IXjSFTGI6ztUEyzAeoKMXDawzmeq'</span>, <span class="hljs-string">'administrator'</span>, <span class="hljs-string">'6Xq6nbPHepbJnGEoiBRtf0F7zoWhMHKN52qdrQA4Mko887AW3Bdi6M6EBoJI'</span>, <span class="hljs-string">'2017-05-15 14:27:15'</span>, <span class="hljs-string">'2017-05-15 20:19:32'</span>),
+(<span class="hljs-number">2</span>, <span class="hljs-string">'asd'</span>, <span class="hljs-string">'asd@asd.com'</span>, <span class="hljs-string">'$2y$10$KrFJYQQLqn7yw6rIARM0AeM06R4kya2Eg6HNq.QwrHTb07zg94Zam'</span>, <span class="hljs-string">'administrator'</span>, NULL, <span class="hljs-string">'2017-05-15 17:25:48'</span>, <span class="hljs-string">'2017-05-15 17:25:48'</span>),
+(<span class="hljs-number">3</span>, <span class="hljs-string">'testing'</span>, <span class="hljs-string">'test@test.com'</span>, <span class="hljs-string">'$2y$10$bdHy0sJGa60V8OQ.K0Zy4ujfhzkFojmR7.FcAFGGCm/Fpmq2JixA2'</span>, <span class="hljs-string">'administrator'</span>, <span class="hljs-string">'IbQh8d6JO4tYqxhPpOTA3XhUpmBV0jyjLMuwWuqFjhAtLnL7ZPl0mpdLlXUn'</span>, <span class="hljs-string">'2017-05-16 15:42:35'</span>, <span class="hljs-string">'2017-05-16 15:42:35'</span>),
+(<span class="hljs-number">4</span>, <span class="hljs-string">'Aaron Rivers'</span>, <span class="hljs-string">'arivers336@gmail.com'</span>, <span class="hljs-string">'$2y$10$cIBYT0I7445vOXHoPfyC9.Ju9vkZ/B4s9oxzu6z674mKLrLLBdk4G'</span>, <span class="hljs-string">'administrator'</span>, NULL, <span class="hljs-string">'2017-05-18 20:10:04'</span>, <span class="hljs-string">'2017-05-18 20:10:04'</span>),
+(<span class="hljs-number">5</span>, <span class="hljs-string">'Aaron'</span>, <span class="hljs-string">'arivers@cheddarexpress.com'</span>, <span class="hljs-string">'$2y$10$wB/snOJ16rUXr2bcccHL..wAWchRdttrQnMdLrlEQCB/xO1KBgCzS'</span>, <span class="hljs-string">'administrator'</span>, NULL, <span class="hljs-string">'2017-05-19 14:20:20'</span>, <span class="hljs-string">'2017-05-19 14:20:20'</span>),
+(<span class="hljs-number">11</span>, <span class="hljs-string">'Iso 1'</span>, <span class="hljs-string">'iso1@gmail.com'</span>, <span class="hljs-string">'$2y$10$WdypHWuA.3lJq0ug5PW5J.aRIQlUEC62D/EsGuh6pPvu.GufY.s7O'</span>, <span class="hljs-string">'iso'</span>, NULL, <span class="hljs-string">'2017-05-25 17:42:24'</span>, <span class="hljs-string">'2017-05-25 17:42:24'</span>),
+(<span class="hljs-number">12</span>, <span class="hljs-string">'iso 2'</span>, <span class="hljs-string">'iso2@gmail.com'</span>, <span class="hljs-string">'$2y$10$RpzGZZNObb1t7kZk7uFM/.lkkg.hjbOBgpZgZiRDiUDTcQ9n0V7Sq'</span>, <span class="hljs-string">'iso'</span>, NULL, <span class="hljs-string">'2017-05-25 17:43:07'</span>, <span class="hljs-string">'2017-05-25 17:43:07'</span>),
+(<span class="hljs-number">13</span>, <span class="hljs-string">'Agent 1'</span>, <span class="hljs-string">'agent1@gmail.com'</span>, <span class="hljs-string">'$2y$10$/1Y3x3owPZfBrjQRLp6LxuLkKbC.78B2xSpgPfKz20N6fJyRm0ZEy'</span>, <span class="hljs-string">'sales_agent'</span>, NULL, <span class="hljs-string">'2017-05-25 18:41:22'</span>, <span class="hljs-string">'2017-05-25 18:41:22'</span>),
+(<span class="hljs-number">14</span>, <span class="hljs-string">'Kevin'</span>, <span class="hljs-string">'kshrestha@cheddarexpress.com'</span>, <span class="hljs-string">'$2y$10$VG7qZR1.HWgZFEq53mPsKu/fAWsJhnwoYp8/i4KYqqSUjvJlltxKW'</span>, <span class="hljs-string">'administrator'</span>, <span class="hljs-string">'RpzcSWR0ab4qZ99EnCzPnXkwixhHbsYWppRk8ipeO6bYndHCfHghDV5QxNWF'</span>, <span class="hljs-string">'2017-05-30 18:24:30'</span>, <span class="hljs-string">'2017-05-30 18:24:30'</span>),
+(<span class="hljs-number">15</span>, <span class="hljs-string">'Alexl'</span>, <span class="hljs-string">'alex@alex.com'</span>, <span class="hljs-string">'$2y$10$M1kzNvEXG4sGMp0vmcG5XuUkOsz4T/0VR5e1ajK0VrkjztWgdm4ka'</span>, <span class="hljs-string">'lender'</span>, NULL, <span class="hljs-string">'2017-05-31 13:41:12'</span>, <span class="hljs-string">'2017-05-31 13:41:12'</span>),
+(<span class="hljs-number">19</span>, NULL, <span class="hljs-string">'pross@pross.com'</span>, <span class="hljs-string">'$2y$10$UWq9TIMEhnzy9bfLLF9a9uaRET/NmJwjURus8kYqRwrB6s0.U4Q/q'</span>, <span class="hljs-string">'processor'</span>, NULL, <span class="hljs-string">'2017-05-31 14:31:32'</span>, <span class="hljs-string">'2017-05-31 14:31:32'</span>),
+(<span class="hljs-number">20</span>, NULL, <span class="hljs-string">'jello@hello.com'</span>, <span class="hljs-string">'$2y$10$TKqmIhDZWfbqIHmDt8px7O12f8vrgRZnfJDYkvF1f9sEFHCXgqYbC'</span>, <span class="hljs-string">'processor'</span>, NULL, <span class="hljs-string">'2017-05-31 15:18:36'</span>, <span class="hljs-string">'2017-05-31 15:18:36'</span>);
+
+/*!<span class="hljs-number">40101</span> SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!<span class="hljs-number">40101</span> SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!<span class="hljs-number">40101</span> SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+</code></pre>
+
+</body></html>
